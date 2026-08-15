@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Tic Tac Toe game built with HTML5, CSS3, JavaScript and Bulma CSS."
+    >
+
+    <title>Tic Tac Toe | JavaScript Game</title>
+
+    <!-- Bulma CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    >
+
+    <!-- Custom CSS -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+    <nav
+        class="navbar is-dark"
+        role="navigation"
+        aria-label="main navigation"
+    >
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-weight-bold" href="#">
+                    TIC TAC TOE
+                </a>
+            </div>
+
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <span class="tag is-info is-medium">
+                            JavaScript Game
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+    <main class="section">
+
+        <div class="container">
+
+            <!-- Page Header -->
+            <section class="has-text-centered mb-6">
+                <h1 class="title is-1">
+                    Tic Tac Toe
+                </h1>
+
+                <p class="subtitle is-5">
+                    Two players. One board. Three in a row.
+                </p>
+            </section>
+
+
+            <!-- =================================
+                 PLAYER SETUP
+            ================================== -->
+            <section
+                id="setup-section"
+                class="box setup-card"
+            >
+
+                <h2 class="title is-4 has-text-centered">
+                    Player Setup
+                </h2>
+
+                <div class="columns">
+
+                    <!-- Player 1 -->
+                    <div class="column">
+                        <div class="field">
+
+                            <label
+                                class="label"
+                                for="player-one-name"
+                            >
+                                Player 1
+                            </label>
+
+                            <div class="control">
+                                <input
+                                    id="player-one-name"
+                                    class="input"
+                                    type="text"
+                                    placeholder="Enter Player 1 name"
+                                    maxlength="20"
+                                    autocomplete="off"
+                                >
+                            </div>
+
+                            <p class="help">
+                                Marker: <strong>X</strong>
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Player 2 -->
+                    <div class="column">
+                        <div class="field">
+
+                            <label
+                                class="label"
+                                for="player-two-name"
+                            >
+                                Player 2
+                            </label>
+
+                            <div class="control">
+                                <input
+                                    id="player-two-name"
+                                    class="input"
+                                    type="text"
+                                    placeholder="Enter Player 2 name"
+                                    maxlength="20"
+                                    autocomplete="off"
+                                >
+                            </div>
+
+                            <p class="help">
+                                Marker: <strong>O</strong>
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="has-text-centered">
+
+                    <button
+                        id="start-game-button"
+                        class="button is-primary is-medium"
+                        type="button"
+                    >
+                        Start Game
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 GAME SECTION
+            ================================== -->
+            <section
+                id="game-section"
+                class="is-hidden"
+            >
+
+                <!-- Status -->
+                <div
+                    id="status-message"
+                    class="notification is-info has-text-centered"
+                    aria-live="polite"
+                >
+                    Player's turn
+                </div>
+
+
+                <!-- Player Information -->
+                <div class="columns">
+
+                    <div class="column">
+                        <div
+                            id="player-one-card"
+                            class="box player-card player-x"
+                        >
+                            <p class="heading">
+                                PLAYER 1
+                            </p>
+
+                            <p
+                                id="player-one-display"
+                                class="title is-4"
+                            >
+                                Player 1
+                            </p>
+
+                            <span class="tag is-danger is-medium">
+                                X
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="column">
+                        <div
+                            id="player-two-card"
+                            class="box player-card player-o"
+                        >
+                            <p class="heading">
+                                PLAYER 2
+                            </p>
+
+                            <p
+                                id="player-two-display"
+                                class="title is-4"
+                            >
+                                Player 2
+                            </p>
+
+                            <span class="tag is-link is-medium">
+                                O
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Game Board -->
+                <div class="game-board-wrapper">
+
+                    <div
+                        id="game-board"
+                        class="game-board"
+                        role="grid"
+                        aria-label="Tic Tac Toe board"
+                    >
+
+                        <button
+                            class="game-cell"
+                            data-index="0"
+                            type="button"
+                            aria-label="Cell 1"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="1"
+                            type="button"
+                            aria-label="Cell 2"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="2"
+                            type="button"
+                            aria-label="Cell 3"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="3"
+                            type="button"
+                            aria-label="Cell 4"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="4"
+                            type="button"
+                            aria-label="Cell 5"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="5"
+                            type="button"
+                            aria-label="Cell 6"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="6"
+                            type="button"
+                            aria-label="Cell 7"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="7"
+                            type="button"
+                            aria-label="Cell 8"
+                        ></button>
+
+                        <button
+                            class="game-cell"
+                            data-index="8"
+                            type="button"
+                            aria-label="Cell 9"
+                        ></button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Result -->
+                <div
+                    id="result-message"
+                    class="notification is-success has-text-centered is-hidden"
+                    aria-live="assertive"
+                >
+                </div>
+
+
+                <!-- Controls -->
+                <div class="buttons is-centered mt-5">
+
+                    <button
+                        id="restart-button"
+                        class="button is-warning is-medium"
+                        type="button"
+                    >
+                        Restart Game
+                    </button>
+
+                    <button
+                        id="new-players-button"
+                        class="button is-light is-medium"
+                        type="button"
+                    >
+                        New Players
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+
+            <p>
+                <strong>Tic Tac Toe</strong>
+                built with HTML5, CSS3, JavaScript and Bulma.
+            </p>
+
+            <p>
+                The Odin Project JavaScript exercise.
+            </p>
+
+        </div>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>
